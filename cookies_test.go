@@ -19,6 +19,10 @@ func TestNewWithCookie(t *testing.T) {
 	rr := httptest.NewRecorder()
 
 	sessionId, err := store.NewWithCookie(rr, "hello")
+	if err != nil {
+		t.Fatalf("failed to create new session with cookie: %v", err)
+	}
+
 	sessionCookie := rr.Result().Cookies()
 	if len(sessionCookie) != 1 {
 		t.Fatal("failed 1 new cookie")
