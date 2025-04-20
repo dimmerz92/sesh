@@ -39,7 +39,7 @@ func TestNewSessionStore(t *testing.T) {
 
 func TestAddToStore(t *testing.T) {
 	// disk add
-	dStore, err := NewSessionStore(DefaultConfig().WithSessionLength(time.Second * 10))
+	dStore, err := NewSessionStore(DefaultConfig().WithSessionLength(time.Second * 2))
 	if err != nil {
 		t.Fatalf("failed disk store: %v", err)
 	}
@@ -51,7 +51,7 @@ func TestAddToStore(t *testing.T) {
 	}
 
 	// mem add
-	mStore, err := NewSessionStore(DefaultConfig().WithInMemory(true).WithSessionLength(time.Second * 10))
+	mStore, err := NewSessionStore(DefaultConfig().WithInMemory(true).WithSessionLength(time.Second * 2))
 	if err != nil {
 		t.Fatalf("failed mem store: %v", err)
 	}
@@ -124,7 +124,7 @@ func TestExpired(t *testing.T) {
 		t.Fatalf("failed mem expired, not added: %v", err)
 	}
 
-	time.Sleep(time.Second * 11)
+	time.Sleep(time.Second * 3)
 
 	// disk expired get
 	var diskData testStruct
@@ -139,4 +139,7 @@ func TestExpired(t *testing.T) {
 	if err == nil {
 		t.Fatalf("failed mem expired, not deleted: %v", err)
 	}
+
+	diskStore.Close()
+	memStore.Close()
 }
