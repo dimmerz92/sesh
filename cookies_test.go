@@ -36,7 +36,7 @@ func TestGetWithCookie(t *testing.T) {
 	rr := httptest.NewRecorder()
 
 	var v string
-	err := store.GetWithCookie(rr, r, cookie.Value, &v)
+	err := store.GetWithCookie(rr, r, &v)
 	if err != nil {
 		t.Fatalf("failed to get session from cookie: %v", err)
 	}
@@ -65,7 +65,7 @@ func TestDeleteWithCookie(t *testing.T) {
 	}
 
 	var v string
-	err = store.GetWithCookie(rr, r, cookie.Value, &v)
+	err = store.GetWithCookie(rr, r, &v)
 	if err == nil || v != "" {
 		t.Fatalf("failed to delete with cookie, value still exists: %v", err)
 	}

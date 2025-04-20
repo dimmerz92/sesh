@@ -55,9 +55,15 @@ func (s *sessionStore) DeleteWithCookie(w http.ResponseWriter, r *http.Request) 
 	return nil
 }
 
-func (s *sessionStore) GetWithCookie(w http.ResponseWriter, r *http.Request, sessionId string, v any) error {
+func (s *sessionStore) GetWithCookie(w http.ResponseWriter, r *http.Request, v any) error {
+	// get the session ID
+	cookie, err := r.Cookie(s.config.CookieName)
+	if err != nil {
+		return err
+	}
+
 	// get the session
-	err := s.Get(sessionId, v)
+	err = s.Get(cookie.Value, v)
 	if err != nil {
 		return err
 	}
@@ -66,7 +72,7 @@ func (s *sessionStore) GetWithCookie(w http.ResponseWriter, r *http.Request, ses
 	http.SetCookie(w, &http.Cookie{
 		Name:     s.config.CookieName,
 		Path:     s.config.CookiePath,
-		Value:    sessionId,
+		Value:    cookie.Value,
 		Expires:  time.Now().Add(s.config.SessionLength),
 		HttpOnly: s.config.CookieHttpOnly,
 		Secure:   s.config.CookieSecure,
