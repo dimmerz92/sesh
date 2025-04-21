@@ -9,13 +9,13 @@ import (
 	"github.com/google/uuid"
 )
 
-type sessionStore struct {
+type SessionStore struct {
 	config Config
 	db     *badger.DB
 }
 
 // NewSessionStore returns a session store database connection.
-func NewSessionStore(config Config) (*sessionStore, error) {
+func NewSessionStore(config Config) (*SessionStore, error) {
 	var db *badger.DB
 	var err error
 
@@ -30,19 +30,19 @@ func NewSessionStore(config Config) (*sessionStore, error) {
 		return nil, fmt.Errorf("failed to create a new session store: %w", err)
 	}
 
-	return &sessionStore{
+	return &SessionStore{
 		config: config,
 		db:     db,
 	}, nil
 }
 
 // closes the connection to the session store database.
-func (s *sessionStore) Close() error {
+func (s *SessionStore) Close() error {
 	return s.db.Close()
 }
 
 // New adds a new session to the store along with the given data and returns a session ID.
-func (s *sessionStore) New(data any) (string, error) {
+func (s *SessionStore) New(data any) (string, error) {
 	// generate a uuid session ID
 	sessionId := uuid.NewString()
 
@@ -66,7 +66,7 @@ func (s *sessionStore) New(data any) (string, error) {
 }
 
 // Get retrieves the given session ID and stores the session data in the value pointer v.
-func (s *sessionStore) Get(sessionId string, v any) error {
+func (s *SessionStore) Get(sessionId string, v any) error {
 	var session []byte
 	// retrieve the session and update ttl if it exists
 	err := s.db.View(func(txn *badger.Txn) error {
@@ -120,7 +120,7 @@ func (s *sessionStore) Get(sessionId string, v any) error {
 }
 
 // Delete removes a session from the session store if it exists.
-func (s *sessionStore) Delete(sessionId string) error {
+func (s *SessionStore) Delete(sessionId string) error {
 	err := s.db.Update(func(txn *badger.Txn) error {
 		return txn.Delete([]byte(sessionId))
 	})

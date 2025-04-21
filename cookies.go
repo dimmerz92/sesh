@@ -6,7 +6,7 @@ import (
 )
 
 // NewHttp creates a new session, sets a new session cookie on the response writer, and returns the session ID.
-func (s *sessionStore) NewWithCookie(w http.ResponseWriter, data any) (string, error) {
+func (s *SessionStore) NewWithCookie(w http.ResponseWriter, data any) (string, error) {
 	// create a new session
 	sessionId, err := s.New(data)
 	if err != nil {
@@ -28,7 +28,7 @@ func (s *sessionStore) NewWithCookie(w http.ResponseWriter, data any) (string, e
 }
 
 // Deletes the session from the session store and invalidates the session cookie on the response writer.
-func (s *sessionStore) DeleteWithCookie(w http.ResponseWriter, r *http.Request) error {
+func (s *SessionStore) DeleteWithCookie(w http.ResponseWriter, r *http.Request) error {
 	// get the session ID
 	cookie, err := r.Cookie(s.config.CookieName)
 	if err != nil {
@@ -55,7 +55,7 @@ func (s *sessionStore) DeleteWithCookie(w http.ResponseWriter, r *http.Request) 
 	return nil
 }
 
-func (s *sessionStore) GetWithCookie(w http.ResponseWriter, r *http.Request, v any) error {
+func (s *SessionStore) GetWithCookie(w http.ResponseWriter, r *http.Request, v any) error {
 	// get the session ID
 	cookie, err := r.Cookie(s.config.CookieName)
 	if err != nil {

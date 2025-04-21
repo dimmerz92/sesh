@@ -6,7 +6,9 @@ import (
 )
 
 // SessionChecker checks if a session cookie exists, gets the session if it exists and adds it to the request context.
-func SessionChecker[T any](next http.Handler, store *sessionStore) http.Handler {
+//
+// SessionChecker is a generic function that expects a session data type so it can extract the session data properly.
+func SessionChecker[T any](next http.Handler, store *SessionStore) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// get the session if it exists
 		var data T

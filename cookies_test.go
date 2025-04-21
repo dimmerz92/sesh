@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-var store *sessionStore
+var store *SessionStore
 var cookie *http.Cookie
 
 func TestNewWithCookie(t *testing.T) {

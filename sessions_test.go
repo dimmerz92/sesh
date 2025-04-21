@@ -10,8 +10,8 @@ type testStruct struct {
 	Ice   string
 }
 
-var diskStore *sessionStore
-var memStore *sessionStore
+var diskStore *SessionStore
+var memStore *SessionStore
 
 var diskStoreSesh string
 var memStoreSesh string
