@@ -1,3 +1,18 @@
+<p align="center">
+  <a href="https://goreportcard.com/report/github.com/dimmerz92/sesh">
+    <img src="https://goreportcard.com/badge/github.com/dimmerz92/sesh" alt="Go Report Card" />
+  </a>
+  <a href="https://pkg.go.dev/github.com/dimmerz92/sesh">
+    <img src="https://pkg.go.dev/badge/github.com/dimmerz92/sesh" alt="Go Reference" />
+  </a>
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License" />
+  </a>
+  <a href="https://github.com/dimmerz92/sesh">
+    <img src="https://img.shields.io/badge/Go%20Modules-Yes-green.svg" alt="Go Module"/>
+  </a>
+</p>
+
 # Sesh
 
 Sesh provides a fast and simple session store with for Go back ends, powered by [BadgerDB](https://github.com/hypermodeinc/badger).
@@ -10,6 +25,14 @@ Sesh provides a fast and simple session store with for Go back ends, powered by 
 - Session configurability.
 - Context configurability.
 - Cookie configurability.
+
+# Installation
+
+Add to your project:
+
+```bash
+go get github.com/dimmerz92/sesh@latest
+```
 
 # Examples
 
