@@ -18,7 +18,7 @@
 Sesh provides a fast and simple session store with for Go back ends, powered by [BadgerDB](https://github.com/hypermodeinc/badger).
 
 **Key features:**
-- Powered by BadgerDB, an SST key/value database (very fast!)
+- Powered by BadgerDB, an LSM key/value database (very fast!)
 - In memory or persistent storage.
 - Optional cookie functionality.
 - Context setting middleware.
